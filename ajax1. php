@@ -1,0 +1,40 @@
+<html>
+<body>
+
+<script type="text/javascript">
+
+function display()
+{
+    var x = new XMLHttpRequest();
+
+    var n = document.getElementById("name").value;
+
+    x.open("GET", "order.php?name=" + n, true);
+
+    x.send();
+
+    x.onreadystatechange = function()
+    {
+        if (x.readyState == 4 && x.status == 200)
+        {
+            document.getElementById("show").innerHTML =
+                x.responseText;
+        }
+    };
+}
+
+</script>
+
+Customer Name:
+
+<select id="name" onchange="display()">
+
+    <option>Rahul</option>
+    <option>Rohit</option>
+
+</select>
+
+<h3 id="show"></h3>
+
+</body>
+</html>
