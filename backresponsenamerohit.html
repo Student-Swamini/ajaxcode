@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Name Response</title>
+</head>
+<body>
+
+Enter your name:
+<input type="text" id="name" onkeyup="sendName()">
+
+<p id="result"></p>
+
+<script>
+function sendName() {
+
+    var name = document.getElementById("name").value;
+
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("result").innerHTML =
+                this.responseText;
+        }
+    };
+
+    xhttp.open("GET", "backresponsename.php?name=" + name, true);
+    xhttp.send();
+}
+</script>
+
+</body>
+</html>

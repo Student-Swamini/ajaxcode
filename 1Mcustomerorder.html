@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Details</title>
+</head>
+
+<body>
+
+<h2>Order Details</h2>
+
+<select id="customer" onchange="getOrders()">
+    <option value="">Select Customer</option>
+</select>
+
+<br><br>
+
+<table border="1" id="result">
+
+    <tr>
+        <th>Order No</th>
+        <th>Order Date</th>
+        <th>Shipping Address</th>
+    </tr>
+
+</table>
+
+<script>
+
+function loadCustomers() {
+
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function() {
+
+        if (this.readyState == 4 && this.status == 200) {
+
+            var data = JSON.parse(this.responseText);
+
+            var select = document.getElementById("customer");
+
+            for (var i = 0; i < data.length; i++) {
+
+                var option = document.createElement("option");
+
+                option.value = data[i].cno;
+                option.text = data[i].cname;
+
+                select.appendChild(option);
+            }
+        }
+    };
+
+    xhttp.open(
+        "GET",
+        "1Mcustomerorder.php?action=customers",
+        true
+    );
+
+    xhttp.send();
+}
+
+
+function getOrders() {
+
+    var cno = document.getElementById("customer").value;
+
+    if (cno == "") {
+        return;
+    }
+
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function() {
+
+        if (this.readyState == 4 && this.status == 200) {
+
+            var data = JSON.parse(this.responseText);
+
+            var table = document.getElementById("result");
+
+            table.innerHTML =
+                "<tr>" +
+                "<th>Order No</th>" +
+                "<th>Order Date</th>" +
+                "<th>Shipping Address</th>" +
+                "</tr>";
+
+            for (var i = 0; i < data.length; i++) {
+
+                var row = table.insertRow();
+
+                row.insertCell(0).innerHTML = data[i].ono;
+                row.insertCell(1).innerHTML = data[i].odate;
+                row.insertCell(2).innerHTML =
+                    data[i].shipping_address;
+            }
+        }
+    };
+
+    xhttp.open(
+        "GET",
+        "1Mcustomerorder.php?cno=" + cno,
+        true
+    );
+
+    xhttp.send();
+}
+
+loadCustomers();
+
+</script>
+
+</body>
+</html>

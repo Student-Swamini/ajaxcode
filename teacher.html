@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Teacher Details</title>
+</head>
+<body>
+
+<h2>Teacher Details</h2>
+
+<select id="teacher" onchange="getTeacher()">
+    <option value="">Select Teacher</option>
+</select>
+
+<br><br>
+
+<table border="1" id="result">
+    <tr>
+        <th>No</th>
+        <th>Name</th>
+        <th>Qualification</th>
+        <th>Salary</th>
+    </tr>
+</table>
+
+<script>
+
+var xhttp = new XMLHttpRequest();
+
+xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+
+        var data = JSON.parse(this.responseText);
+
+        var select = document.getElementById("teacher");
+
+        for (var i = 0; i < data.length; i++) {
+            var option = document.createElement("option");
+
+            option.value = data[i].tno;
+            option.text = data[i].name;
+
+            select.appendChild(option);
+        }
+    }
+};
+
+xhttp.open("GET", "teacher.php", true);
+xhttp.send();
+
+
+function getTeacher() {
+
+    var id = document.getElementById("teacher").value;
+
+    if (id == "") {
+        return;
+    }
+
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function() {
+
+        if (this.readyState == 4 && this.status == 200) {
+
+            var data = JSON.parse(this.responseText);
+
+            var table = document.getElementById("result");
+
+            table.innerHTML =
+                "<tr>" +
+                "<th>No</th>" +
+                "<th>Name</th>" +
+                "<th>Qualification</th>" +
+                "<th>Salary</th>" +
+                "</tr>";
+
+            var row = table.insertRow();
+
+            row.insertCell(0).innerHTML = data.tno;
+            row.insertCell(1).innerHTML = data.name;
+            row.insertCell(2).innerHTML = data.qualification;
+            row.insertCell(3).innerHTML = data.salary;
+        }
+    };
+
+    xhttp.open("GET", "teacher.php?tno=" + id, true);
+    xhttp.send();
+}
+
+</script>
+
+</body>
+</html>

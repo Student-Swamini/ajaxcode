@@ -1,0 +1,12 @@
+CREATE TABLE teacher (
+    tno SERIAL PRIMARY KEY,
+    name VARCHAR(50),
+    qualification VARCHAR(50),
+    salary NUMERIC(10,2)
+);
+
+INSERT INTO teacher (name, qualification, salary)
+VALUES
+('Rohit', 'M.Sc', 40000),
+('Virat', 'M.Tech', 50000),
+('Ashwin', 'Ph.D', 60000);

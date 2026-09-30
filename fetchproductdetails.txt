@@ -1,0 +1,12 @@
+CREATE TABLE product (
+    pid SERIAL PRIMARY KEY,
+    pname VARCHAR(50),
+    price NUMERIC(10,2),
+    quantity INT
+);
+
+INSERT INTO product (pname, price, quantity)
+VALUES
+('Laptop', 50000, 10),
+('Mobile', 20000, 20),
+('Keyboard', 1500, 30);

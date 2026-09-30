@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Contact Details</title>
+</head>
+<body>
+
+<h2>Contact Details</h2>
+
+<button onclick="loadContacts()">Show Contacts</button>
+
+<br><br>
+
+<table border="1" id="contactTable">
+    <tr>
+        <th>S.No</th>
+        <th>Name</th>
+        <th>Residence No</th>
+        <th>Mobile No</th>
+        <th>Address</th>
+    </tr>
+</table>
+
+<script>
+function loadContacts() {
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+
+            var lines = this.responseText.trim().split("\n");
+            var table = document.getElementById("contactTable");
+
+            for (var i = 0; i < lines.length; i++) {
+
+                var data = lines[i].split(",");
+
+                var row = table.insertRow();
+
+                row.insertCell(0).innerHTML = i + 1;
+                row.insertCell(1).innerHTML = data[0];
+                row.insertCell(2).innerHTML = data[1];
+                row.insertCell(3).innerHTML = data[2];
+                row.insertCell(4).innerHTML = data[3];
+            }
+        }
+    };
+
+    xhttp.open("GET", "contact.dat", true);
+    xhttp.send();
+}
+</script>
+
+</body>
+</html>

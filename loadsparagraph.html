@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AJAX Example</title>
+</head>
+<body>
+
+<button onclick="loadText()">Click Me</button>
+
+<p id="result"></p>
+
+<script>
+function loadText() {
+
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("result").innerHTML =
+                this.responseText;
+        }
+    };
+
+    xhttp.open("GET", "loadsparagraph.php", true);
+    xhttp.send();
+}
+</script>
+
+</body>
+</html>
