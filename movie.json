@@ -1,0 +1,38 @@
+<html>
+
+<body>
+
+<script>
+
+var movies = [
+    {
+        "name": "Avatar",
+        "year": 2009
+    },
+
+    {
+        "name": "Titanic",
+        "year": 1997
+    },
+
+    {
+        "name": "Avengers",
+        "year": 2012
+    }
+];
+
+var json = JSON.stringify(movies);
+
+var a = JSON.parse(json);
+
+a.sort(function(x, y)
+{
+    return y.year - x.year;
+});
+
+console.log(a);
+
+</script>
+
+</body>
+</html>
