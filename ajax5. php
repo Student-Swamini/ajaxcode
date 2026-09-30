@@ -1,0 +1,56 @@
+<html>
+
+<body>
+
+<script>
+
+function display()
+{
+    var x = new XMLHttpRequest();
+
+    x.open("GET", "employee.json", true);
+
+    x.send();
+
+    x.onreadystatechange = function()
+    {
+        if (x.readyState == 4 && x.status == 200)
+        {
+            var a = JSON.parse(x.responseText);
+
+            var s = "<table border='1'>";
+
+            s += "<tr>";
+            s += "<th>ID</th>";
+            s += "<th>Name</th>";
+            s += "<th>Salary</th>";
+            s += "</tr>";
+
+            for (var i = 0; i < a.length; i++)
+            {
+                s += "<tr>";
+
+                s += "<td>" + a[i].id + "</td>";
+                s += "<td>" + a[i].name + "</td>";
+                s += "<td>" + a[i].salary + "</td>";
+
+                s += "</tr>";
+            }
+
+            s += "</table>";
+
+            document.getElementById("show").innerHTML = s;
+        }
+    };
+}
+
+</script>
+
+<button onclick="display()">
+    Load Employees
+</button>
+
+<h3 id="show"></h3>
+
+</body>
+</html>
