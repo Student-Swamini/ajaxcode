@@ -1,0 +1,34 @@
+<html>
+
+<body>
+
+<script>
+
+function display()
+{
+    var x = new XMLHttpRequest();
+
+    x.open("GET", "category.php", true);
+
+    x.send();
+
+    x.onreadystatechange = function()
+    {
+        if (x.readyState == 4 && x.status == 200)
+        {
+            document.getElementById("cat").innerHTML =
+                x.responseText;
+        }
+    };
+}
+
+</script>
+
+<button onclick="display()">
+    Load Categories
+</button>
+
+<select id="cat"></select>
+
+</body>
+</html>
