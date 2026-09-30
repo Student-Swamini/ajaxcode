@@ -1,0 +1,39 @@
+<?php
+
+$name = $_GET['name'];
+
+$con = pg_connect(
+    "host=localhost dbname=college user=root"
+);
+
+$query = "SELECT order_no, order_date, shipping_address
+          FROM customer_orders
+          WHERE cname='$name'";
+
+$res = pg_query($con, $query);
+
+if ($res)
+{
+    echo "<table border='1'>";
+
+    echo "<tr>";
+    echo "<th>Order No</th>";
+    echo "<th>Order Date</th>";
+    echo "<th>Shipping Address</th>";
+    echo "</tr>";
+
+    while ($row = pg_fetch_row($res))
+    {
+        echo "<tr>";
+
+        echo "<td>" . $row[0] . "</td>";
+        echo "<td>" . $row[1] . "</td>";
+        echo "<td>" . $row[2] . "</td>";
+
+        echo "</tr>";
+    }
+
+    echo "</table>";
+}
+
+?>
