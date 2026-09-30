@@ -1,0 +1,25 @@
+<?php
+
+$pid = $_GET['pid'];
+
+$con = pg_connect(
+    "host=localhost dbname=college user=root"
+);
+
+$query = "SELECT * FROM product
+          WHERE pid='$pid'";
+
+$res = pg_query($con, $query);
+
+if ($res)
+{
+    while ($row = pg_fetch_row($res))
+    {
+        echo "Product ID : " . $row[0] . "<br>";
+        echo "Product Name : " . $row[1] . "<br>";
+        echo "Price : " . $row[2] . "<br>";
+        echo "Quantity : " . $row[3] . "<br>";
+    }
+}
+
+?>
