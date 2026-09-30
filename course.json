@@ -1,0 +1,55 @@
+<html>
+
+<body>
+
+<script>
+
+var courses = [
+
+    {
+        "id": 1,
+        "name": "BCS",
+        "duration": "3 years"
+    },
+
+    {
+        "id": 2,
+        "name": "BCA",
+        "duration": "3 years"
+    },
+
+    {
+        "id": 3,
+        "name": "MCA",
+        "duration": "2 years"
+    },
+
+    {
+        "id": 4,
+        "name": "MCS",
+        "duration": "2 years"
+    }
+
+];
+
+var json = JSON.stringify(courses);
+
+var a = JSON.parse(json);
+
+document.write("Select Course : ");
+
+document.write("<select>");
+
+for (var i = 0; i < a.length; i++)
+{
+    document.write(
+        "<option>" + a[i].name + "</option>"
+    );
+}
+
+document.write("</select>");
+
+</script>
+
+</body>
+</html>
