@@ -1,0 +1,52 @@
+<html>
+
+<body>
+
+<form id="myform">
+
+Name:
+
+<input type="text" id="name">
+
+<br><br>
+
+Age:
+
+<input type="text" id="age">
+
+<br><br>
+
+City:
+
+<input type="text" id="city">
+
+<br><br>
+
+<button type="button" onclick="convert()">
+    Submit
+</button>
+
+</form>
+
+<script>
+
+function convert()
+{
+    var obj = {
+
+        name: document.getElementById("name").value,
+
+        age: document.getElementById("age").value,
+
+        city: document.getElementById("city").value
+    };
+
+    var json = JSON.stringify(obj);
+
+    console.log(json);
+}
+
+</script>
+
+</body>
+</html>
