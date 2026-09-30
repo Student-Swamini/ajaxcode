@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Show Teacher Details</title>
+</head>
+
+<body>
+
+<h2>Teacher Details</h2>
+
+<select id="teacher" onchange="showTeacher()">
+    <option value="">Select Teacher</option>
+    <option value="Rahul">Rahul</option>
+    <option value="Priya">Priya</option>
+    <option value="Amit">Amit</option>
+</select>
+
+<br><br>
+
+<div id="result"></div>
+
+<script>
+function showTeacher()
+{
+    var name = document.getElementById("teacher").value;
+
+    var xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function()
+    {
+        if (this.readyState == 4 && this.status == 200)
+        {
+            document.getElementById("result").innerHTML =
+                this.responseText;
+        }
+    };
+
+    xhttp.open("GET", "GetB1.php?name=" + name, true);
+    xhttp.send();
+}
+</script>
+
+</body>
+</html>
